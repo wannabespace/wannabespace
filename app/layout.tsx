@@ -1,22 +1,22 @@
-import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from 'next'
+import { Bricolage_Grotesque } from 'next/font/google'
+import { ThemeProvider } from '@/components/theme-provider'
+import './globals.css'
 
 const bricolageGrotesque = Bricolage_Grotesque({
-  variable: "--font-bricolage-grotesque",
-  subsets: ["latin"],
-});
+  variable: '--font-bricolage-grotesque',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
-  title: "Wannabe Space",
-  description: "Trying to improve the TypeScript world"
-};
+  title: 'Wannabe Space',
+  description: 'Trying to improve the TypeScript world',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -24,14 +24,14 @@ export default function RootLayout({
         className={`${bricolageGrotesque.variable} antialiased`}
       >
         <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-         >
-        {children}
-	      </ThemeProvider>
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
