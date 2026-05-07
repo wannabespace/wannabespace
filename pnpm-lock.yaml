@@ -853,10 +853,6 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  baseline-browser-mapping@2.8.31:
-    resolution: {integrity: sha512-a28v2eWrrRWPpJSzxc+mKwm0ZtVx/G8SepdQZDArnXYU/XS+IF6mp8aB/4E+hH1tyGCoDo3KlUCdlSxGDsRkAw==}
-    hasBin: true
-
   brace-expansion@1.1.12:
     resolution: {integrity: sha512-9T9UjW3r0UW5c1Q7GTwllptXwhvYmEzFhzMfZ9H7FQWt+uZePjZPjBP/W1ZEyZ1twGWom5/56TF4lPcqjnDHcg==}
 
@@ -2816,8 +2812,6 @@ snapshots:
 
   baseline-browser-mapping@2.10.27: {}
 
-  baseline-browser-mapping@2.8.31: {}
-
   brace-expansion@1.1.12:
     dependencies:
       balanced-match: 1.0.2
@@ -2837,7 +2831,7 @@ snapshots:
 
   browserslist@4.28.0:
     dependencies:
-      baseline-browser-mapping: 2.8.31
+      baseline-browser-mapping: 2.10.27
       caniuse-lite: 1.0.30001757
       electron-to-chromium: 1.5.261
       node-releases: 2.0.27
