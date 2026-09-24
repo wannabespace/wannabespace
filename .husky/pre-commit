@@ -1,2 +1,14 @@
-pnpm run lint
+#!/bin/sh
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$STAGED_FILES" ] && exit 0
+
+FIX_EXIT_CODE=0
+pnpm run lint:fix || FIX_EXIT_CODE=$?
+
+# Re-stage files that were already staged
+echo "$STAGED_FILES" | while IFS= read -r file; do
+  [ -f "$file" ] && git add -- "$file"
+done
+
+[ $FIX_EXIT_CODE -ne 0 ] && exit $FIX_EXIT_CODE
 pnpm run typecheck

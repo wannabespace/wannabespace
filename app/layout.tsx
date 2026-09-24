@@ -1,37 +1,32 @@
-import type { Metadata } from 'next'
-import { Bricolage_Grotesque } from 'next/font/google'
-import { ThemeProvider } from '@/components/theme-provider'
-import './globals.css'
+import type { Metadata, Viewport } from "next";
+import { Geist } from "next/font/google";
 
-const bricolageGrotesque = Bricolage_Grotesque({
-  variable: '--font-bricolage-grotesque',
-  subsets: ['latin'],
-})
+import "./globals.css";
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+});
 
 export const metadata: Metadata = {
-  title: 'Wannabe Space',
-  description: 'Trying to improve the TypeScript world',
-}
+  description:
+    "We like making cool products. Currently building Tamery and Lang.zone.",
+  title: "Wannabe Space",
+};
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${bricolageGrotesque.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  )
-}
+export const viewport: Viewport = {
+  themeColor: [
+    { color: "#f5f5f6", media: "(prefers-color-scheme: light)" },
+    { color: "#1b1c1f", media: "(prefers-color-scheme: dark)" },
+  ],
+};
+
+const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
+  <html lang="en" className={geist.variable}>
+    <body className="bg-body text-foreground font-sans antialiased">
+      {children}
+    </body>
+  </html>
+);
+
+export default RootLayout;
