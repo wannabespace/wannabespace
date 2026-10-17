@@ -57,46 +57,62 @@ const Home = () => (
 
     <section
       aria-labelledby="products"
-      className="motion-safe:animate-enter stagger-2 flex flex-col justify-center gap-4 py-6 lg:px-9"
+      className="motion-safe:animate-enter stagger-2 flex flex-col gap-4 py-6 lg:px-9"
     >
-      <h2 id="products" className="text-muted-foreground px-6 text-sm">
-        Currently building
-      </h2>
-      <ul className="flex flex-col gap-1">
-        {products.map((product) => (
-          <li key={product.href}>
+      <div className="my-auto flex flex-col gap-4">
+        <h2 id="products" className="text-muted-foreground px-6 text-sm">
+          Currently building
+        </h2>
+        <ul className="flex flex-col gap-1">
+          {products.map((product) => (
+            <li key={product.href}>
+              <a
+                href={product.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group hover:bg-foreground/4 focus-visible:outline-foreground flex items-start gap-4 rounded-3xl p-6 transition-colors duration-150 focus-visible:outline-2"
+              >
+                <Image
+                  src={product.icon}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="ease-house mt-0.5 size-9 shrink-0 rounded-lg shadow-sm transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-md"
+                />
+                <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                  <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">
+                    {product.name}
+                  </h3>
+                  <p className="text-muted-foreground max-w-md text-pretty">
+                    {product.description}
+                  </p>
+                  <span className="text-muted-foreground group-hover:text-foreground flex items-center gap-1 text-sm transition-colors duration-150">
+                    {product.domain}
+                    <HugeiconsIcon
+                      icon={ArrowUpRight01Icon}
+                      className="ease-house size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
+                  </span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <footer className="text-muted-foreground/70 px-6 text-xs">
+        <address className="flex flex-col gap-0.5 not-italic">
+          <span>
+            © {new Date().getFullYear()} Wannabe Space, LLC ·{" "}
             <a
-              href={product.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group hover:bg-foreground/4 focus-visible:outline-foreground flex items-start gap-4 rounded-3xl p-6 transition-colors duration-150 focus-visible:outline-2"
+              href="mailto:hello@wannabespace.com"
+              className="hover:text-foreground transition-colors duration-150"
             >
-              <Image
-                src={product.icon}
-                alt=""
-                width={40}
-                height={40}
-                className="ease-house mt-0.5 size-9 shrink-0 rounded-lg shadow-sm transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-md"
-              />
-              <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">
-                  {product.name}
-                </h3>
-                <p className="text-muted-foreground max-w-md text-pretty">
-                  {product.description}
-                </p>
-                <span className="text-muted-foreground group-hover:text-foreground flex items-center gap-1 text-sm transition-colors duration-150">
-                  {product.domain}
-                  <HugeiconsIcon
-                    icon={ArrowUpRight01Icon}
-                    className="ease-house size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </span>
-              </div>
+              hello@wannabespace.com
             </a>
-          </li>
-        ))}
-      </ul>
+          </span>
+          <span>131 Continental Dr, Suite 305, Newark, DE 19713, USA</span>
+        </address>
+      </footer>
     </section>
   </div>
 );
