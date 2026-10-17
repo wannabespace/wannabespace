@@ -100,18 +100,13 @@ const Home = () => (
         </ul>
       </div>
       <footer className="text-muted-foreground/70 px-6 text-xs">
-        <address className="flex flex-col gap-0.5 not-italic">
-          <span>
-            © {new Date().getFullYear()} Wannabe Space, LLC ·{" "}
-            <a
-              href="mailto:hello@wannabespace.com"
-              className="hover:text-foreground transition-colors duration-150"
-            >
-              hello@wannabespace.com
-            </a>
-          </span>
-          <span>131 Continental Dr, Suite 305, Newark, DE 19713, USA</span>
-        </address>
+        © {new Date().getFullYear()} Wannabe Space, LLC ·{" "}
+        <a
+          href="mailto:hello@wannabespace.com"
+          className="hover:text-foreground transition-colors duration-150"
+        >
+          hello@wannabespace.com
+        </a>
       </footer>
     </section>
   </div>
