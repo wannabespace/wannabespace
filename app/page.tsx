@@ -25,6 +25,14 @@ const products = [
   },
   {
     description:
+      "An email agent that reads your Gmail, drafts replies in your voice and only shows you what needs you.",
+    domain: "fewmail.app",
+    href: "https://fewmail.app",
+    icon: "/fewmail.svg",
+    name: "Fewmail",
+  },
+  {
+    description:
       "Translate between 70+ languages, with natural alternatives for every result.",
     domain: "lang.zone",
     href: "https://lang.zone",
@@ -200,7 +208,7 @@ const Chapter = ({
 );
 
 const stageClassName =
-  "bg-muted ring-foreground/4 dot-grid relative isolate aspect-4/3 overflow-hidden rounded-3xl ring";
+  "bg-muted ring-foreground/4 dot-grid relative isolate aspect-4/3 overflow-hidden in-[li:first-child]:md:aspect-2/1 rounded-3xl ring";
 
 const Products = () => (
   <Chapter
@@ -211,7 +219,7 @@ const Products = () => (
   >
     <ul className="mt-12 grid gap-6 md:grid-cols-2">
       {products.map((product, index) => (
-        <li key={product.href} className="reveal">
+        <li key={product.href} className="reveal first:md:col-span-2">
           <a
             href={product.href}
             target="_blank"
@@ -225,8 +233,8 @@ const Products = () => (
                   alt="Tamery showing a products table with a query logger"
                   width={2514}
                   height={1696}
-                  sizes="(min-width: 768px) 560px, 100vw"
-                  className="ease-house absolute top-[14%] left-[10%] w-[115%] max-w-none rounded-xl shadow-xl transition-transform duration-500 group-hover:-translate-y-1.5"
+                  sizes="(min-width: 768px) 840px, 100vw"
+                  className="ease-house absolute top-[14%] left-[10%] w-[115%] max-w-none rounded-xl shadow-xl transition-transform duration-500 group-hover:-translate-y-1.5 md:left-1/8 md:w-3/4"
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">

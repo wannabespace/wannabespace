@@ -10,7 +10,7 @@ const inter = Inter({
 
 const siteUrl = "https://wannabespace.com";
 const description =
-  "Wannabe Space is a small software studio building the products we want to use ourselves: Tamery, an AI database client, and Lang.zone, a natural translator.";
+  "Wannabe Space is a small software studio building the products we want to use ourselves: Tamery, an AI database client, Fewmail, an email agent, and Lang.zone, a natural translator.";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
