@@ -1,13 +1,23 @@
-import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
+import {
+  ArrowUpRight01Icon,
+  GithubIcon,
+  Idea01Icon,
+  UserGroupIcon,
+} from "@hugeicons/core-free-icons";
+import type { IconSvgElement } from "@hugeicons/react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 import { Mesh } from "./mesh";
+
+const EMAIL = "hello@wannabespace.com";
+const GITHUB_URL = "https://github.com/wannabespace";
 
 const products = [
   {
     description:
-      "AI database client for Postgres, MySQL, MSSQL and ClickHouse.",
+      "The AI database client for Postgres, MySQL, SQL Server, ClickHouse, MongoDB and more. AI writes the SQL, your agents query through MCP.",
     domain: "tamery.app",
     href: "https://tamery.app",
     icon: "/tamery.png",
@@ -23,6 +33,44 @@ const products = [
   },
 ];
 
+const facts: { description: string; icon: IconSvgElement; title: string }[] = [
+  {
+    description:
+      "Every product started as a tool we wanted and could not find.",
+    icon: Idea01Icon,
+    title: "Built for ourselves",
+  },
+  {
+    description: "A few people, and a short path from an idea to a release.",
+    icon: UserGroupIcon,
+    title: "Small team",
+  },
+  {
+    description: "Tamery's code is public on GitHub.",
+    icon: GithubIcon,
+    title: "Open source",
+  },
+];
+
+const HEADLINE_WORDS = "We like making cool products.".split(" ");
+
+const WORD_STAGGER = [
+  "stagger-0",
+  "stagger-1",
+  "stagger-2",
+  "stagger-3",
+  "stagger-4",
+];
+
+const linkClassName =
+  "text-muted-foreground hover:text-foreground transition-colors duration-150";
+
+const primaryButtonClassName =
+  "bg-foreground text-body hover:bg-foreground/85 inline-flex h-10 items-center rounded-xl px-4 text-sm font-medium transition duration-150 active:translate-y-px";
+
+const outlineButtonClassName =
+  "bg-card ring-foreground/6 hover:ring-foreground/14 inline-flex h-10 items-center rounded-xl px-4 text-sm font-medium shadow-xs ring transition duration-150 active:translate-y-px";
+
 const Logo = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 617 352" aria-hidden className={className}>
     <path
@@ -36,79 +84,320 @@ const Logo = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const Home = () => (
-  <div className="grid min-h-dvh gap-3 p-3 lg:h-dvh lg:grid-cols-2">
-    <section className="motion-safe:animate-enter relative isolate flex aspect-4/5 flex-col justify-between overflow-hidden rounded-3xl p-8 text-white sm:aspect-video lg:aspect-auto lg:p-12">
-      <Mesh />
-      <div className="relative flex items-center gap-2.5 text-lg font-medium">
-        <Logo className="h-4 w-auto" />
-        Wannabe Space
+const Brand = () => (
+  <a
+    href="#top"
+    className="flex items-center gap-2 text-base font-semibold tracking-tight"
+  >
+    <Logo className="h-3.5 w-auto" />
+    Wannabe Space
+  </a>
+);
+
+const Navbar = () => (
+  <header className="bg-body/85 nav-border sticky top-0 z-40 h-16 border-b border-transparent backdrop-blur-md">
+    <nav
+      aria-label="Main"
+      className="mx-auto flex h-full max-w-6xl items-center gap-8 px-4 sm:px-6"
+    >
+      <Brand />
+      <div className="hidden items-center gap-6 text-sm sm:flex">
+        <a href="#products" className={linkClassName}>
+          Products
+        </a>
+        <a href="#company" className={linkClassName}>
+          Company
+        </a>
       </div>
-      <div className="relative flex flex-col gap-5">
-        <h1 className="text-display motion-safe:animate-enter stagger-1 max-w-xl font-medium text-balance">
-          We like making cool products.
-        </h1>
-        <p className="motion-safe:animate-enter stagger-2 max-w-md text-lg text-pretty text-white/75">
-          Wannabe Space is a small team building the software we want to use
-          ourselves. Here is what we are working on.
+      <a
+        href={`mailto:${EMAIL}`}
+        className={`${primaryButtonClassName} ml-auto h-8 rounded-lg px-3`}
+      >
+        Contact
+      </a>
+    </nav>
+  </header>
+);
+
+const Hero = () => (
+  <section className="pt-16 sm:pt-24">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <h1 className="text-display max-w-4xl text-balance">
+        {HEADLINE_WORDS.map((word, index) => (
+          <span key={word}>
+            {index > 0 && " "}
+            <span
+              className={`motion-safe:animate-enter inline-block ${WORD_STAGGER[index]}`}
+            >
+              {word}
+            </span>
+          </span>
+        ))}
+      </h1>
+      <p className="motion-safe:animate-enter stagger-5 text-muted-foreground mt-6 max-w-xl text-lg text-pretty">
+        Wannabe Space is a small software studio building the products we want
+        to use ourselves.
+      </p>
+      <div className="motion-safe:animate-enter stagger-6 mt-8 flex flex-wrap gap-2">
+        <a href="#products" className={primaryButtonClassName}>
+          See products
+        </a>
+        <a href={`mailto:${EMAIL}`} className={outlineButtonClassName}>
+          Contact
+        </a>
+      </div>
+    </div>
+    <div className="motion-safe:animate-rise stagger-8 mx-auto mt-16 max-w-7xl px-4 sm:mt-20 sm:px-6">
+      <div className="relative isolate flex h-72 items-center justify-center overflow-hidden rounded-3xl text-white sm:h-112">
+        <Mesh />
+        <Logo className="relative h-16 w-auto drop-shadow-lg sm:h-28" />
+      </div>
+    </div>
+  </section>
+);
+
+const Chapter = ({
+  children,
+  description,
+  id,
+  label,
+  subtitle,
+  title,
+}: {
+  children: ReactNode;
+  description?: string;
+  id: string;
+  label: string;
+  subtitle?: string;
+  title: string;
+}) => (
+  <section
+    id={id}
+    aria-labelledby={`${id}-heading`}
+    className="mx-auto max-w-6xl scroll-mt-16 px-4 py-16 sm:px-6 sm:py-24"
+  >
+    <div className="reveal border-foreground/8 grid gap-x-6 gap-y-8 border-t pt-8 sm:pt-10 md:grid-cols-12">
+      <div className="flex flex-col gap-8 md:col-span-8">
+        <p>{label}</p>
+        <h2
+          id={`${id}-heading`}
+          className="text-3xl tracking-tight text-balance sm:text-4xl lg:text-5xl"
+        >
+          {title}
+          {subtitle && (
+            <span className="text-muted-foreground block">{subtitle}</span>
+          )}
+        </h2>
+      </div>
+      {description && (
+        <p className="text-muted-foreground text-pretty md:col-span-4 md:self-end">
+          {description}
+        </p>
+      )}
+    </div>
+    {children}
+  </section>
+);
+
+const stageClassName =
+  "bg-muted ring-foreground/4 dot-grid relative isolate aspect-4/3 overflow-hidden rounded-3xl ring";
+
+const Products = () => (
+  <Chapter
+    id="products"
+    label="Products"
+    title="Software we build and use every day."
+    subtitle="Each one solves a problem we had."
+  >
+    <ul className="mt-12 grid gap-6 md:grid-cols-2">
+      {products.map((product, index) => (
+        <li key={product.href} className="reveal">
+          <a
+            href={product.href}
+            target="_blank"
+            rel="noreferrer"
+            className="group focus-visible:outline-foreground flex flex-col gap-5 rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4"
+          >
+            <div className={stageClassName}>
+              {index === 0 ? (
+                <Image
+                  src="/tamery-screenshot.png"
+                  alt="Tamery showing a products table with a query logger"
+                  width={2514}
+                  height={1696}
+                  sizes="(min-width: 768px) 560px, 100vw"
+                  className="ease-house absolute top-[14%] left-[10%] w-[115%] max-w-none rounded-xl shadow-xl transition-transform duration-500 group-hover:-translate-y-1.5"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Image
+                    src={product.icon}
+                    alt=""
+                    width={128}
+                    height={128}
+                    className="ease-house size-24 rounded-3xl shadow-xl transition-transform duration-500 group-hover:-translate-y-1.5 sm:size-32"
+                  />
+                </div>
+              )}
+            </div>
+            <div className="flex items-start gap-4 px-1">
+              <Image
+                src={product.icon}
+                alt=""
+                width={40}
+                height={40}
+                className="mt-0.5 size-9 shrink-0 rounded-lg shadow-sm"
+              />
+              <div className="flex min-w-0 flex-col gap-1.5">
+                <h3 className="text-2xl font-medium tracking-tight">
+                  {product.name}
+                </h3>
+                <p className="text-muted-foreground text-pretty">
+                  {product.description}
+                </p>
+                <span className="text-muted-foreground group-hover:text-foreground flex items-center gap-1 text-sm transition-colors duration-150">
+                  {product.domain}
+                  <HugeiconsIcon
+                    icon={ArrowUpRight01Icon}
+                    strokeWidth={2}
+                    className="ease-house size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Chapter>
+);
+
+const Company = () => (
+  <Chapter
+    id="company"
+    label="Company"
+    title="A small team."
+    subtitle="Few products, made with care."
+    description="We started Wannabe Space to build the tools missing from our own work. We keep the team small and ship only what we use ourselves."
+  >
+    <div className="reveal mt-12 grid gap-8 sm:grid-cols-3 sm:gap-0">
+      {facts.map((fact) => (
+        <div
+          key={fact.title}
+          className="border-foreground/8 flex flex-col gap-2 sm:border-l sm:px-6 sm:first:border-l-0 sm:first:pl-0"
+        >
+          <span className="flex items-center gap-2 text-sm font-medium">
+            <HugeiconsIcon
+              icon={fact.icon}
+              strokeWidth={2}
+              className="text-muted-foreground size-4"
+            />
+            {fact.title}
+          </span>
+          <p className="text-muted-foreground text-sm text-pretty">
+            {fact.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </Chapter>
+);
+
+const Contact = () => (
+  <section
+    aria-labelledby="contact-heading"
+    className="mx-auto max-w-6xl px-4 py-32 sm:px-6 sm:py-40"
+  >
+    <div className="reveal flex flex-col items-center gap-10 text-center">
+      <h2
+        id="contact-heading"
+        className="text-3xl tracking-tight text-balance wrap-break-word sm:text-5xl lg:text-6xl"
+      >
+        Have an idea or a question?
+        <span className="text-muted-foreground block">
+          Write to us at {EMAIL}.
+        </span>
+      </h2>
+      <a href={`mailto:${EMAIL}`} className={primaryButtonClassName}>
+        Contact
+      </a>
+    </div>
+  </section>
+);
+
+const FooterColumn = ({
+  children,
+  title,
+}: {
+  children: ReactNode;
+  title: string;
+}) => (
+  <div className="flex flex-col gap-3 text-sm">
+    <h2 className="font-medium">{title}</h2>
+    {children}
+  </div>
+);
+
+const Footer = () => (
+  <footer className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+    <div className="border-foreground/8 grid gap-x-6 gap-y-12 border-t pt-12 pb-16 md:grid-cols-12">
+      <div className="flex flex-col gap-4 md:col-span-6">
+        <Brand />
+        <p className="text-muted-foreground max-w-xs text-sm text-pretty">
+          A small software studio building the products we want to use
+          ourselves.
         </p>
       </div>
-    </section>
-
-    <section
-      aria-labelledby="products"
-      className="motion-safe:animate-enter stagger-2 flex flex-col gap-4 py-6 lg:px-9"
-    >
-      <div className="my-auto flex flex-col gap-4">
-        <h2 id="products" className="text-muted-foreground px-6 text-sm">
-          Currently building
-        </h2>
-        <ul className="flex flex-col gap-1">
+      <div className="grid grid-cols-2 gap-10 md:col-span-6 md:grid-cols-3">
+        <FooterColumn title="Products">
           {products.map((product) => (
-            <li key={product.href}>
-              <a
-                href={product.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group hover:bg-foreground/4 focus-visible:outline-foreground flex items-start gap-4 rounded-3xl p-6 transition-colors duration-150 focus-visible:outline-2"
-              >
-                <Image
-                  src={product.icon}
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="ease-house mt-0.5 size-9 shrink-0 rounded-lg shadow-sm transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-md"
-                />
-                <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-                  <h3 className="text-2xl font-medium tracking-tight sm:text-3xl">
-                    {product.name}
-                  </h3>
-                  <p className="text-muted-foreground max-w-md text-pretty">
-                    {product.description}
-                  </p>
-                  <span className="text-muted-foreground group-hover:text-foreground flex items-center gap-1 text-sm transition-colors duration-150">
-                    {product.domain}
-                    <HugeiconsIcon
-                      icon={ArrowUpRight01Icon}
-                      className="ease-house size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
-                  </span>
-                </div>
-              </a>
-            </li>
+            <a
+              key={product.href}
+              href={product.href}
+              target="_blank"
+              rel="noreferrer"
+              className={linkClassName}
+            >
+              {product.name}
+            </a>
           ))}
-        </ul>
+        </FooterColumn>
+        <FooterColumn title="Company">
+          <a href="#company" className={linkClassName}>
+            About
+          </a>
+          <a href={`mailto:${EMAIL}`} className={linkClassName}>
+            Contact
+          </a>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noreferrer"
+            className={linkClassName}
+          >
+            GitHub
+          </a>
+        </FooterColumn>
       </div>
-      <footer className="text-muted-foreground/70 px-6 text-xs">
-        © {new Date().getFullYear()} Wannabe Space, LLC ·{" "}
-        <a
-          href="mailto:hello@wannabespace.com"
-          className="hover:text-foreground transition-colors duration-150"
-        >
-          hello@wannabespace.com
-        </a>
-      </footer>
-    </section>
+    </div>
+    <div className="border-foreground/8 border-t py-6">
+      <p className="text-muted-foreground text-xs">
+        © {new Date().getFullYear()} Wannabe Space, LLC
+      </p>
+    </div>
+  </footer>
+);
+
+const Home = () => (
+  <div id="top" className="flex min-h-dvh flex-col overflow-x-clip">
+    <Navbar />
+    <main className="flex-1">
+      <Hero />
+      <Products />
+      <Company />
+      <Contact />
+    </main>
+    <Footer />
   </div>
 );
 

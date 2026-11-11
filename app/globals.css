@@ -6,6 +6,7 @@
 
   --color-body: var(--body);
   --color-card: var(--card);
+  --color-muted: var(--muted);
   --color-foreground: var(--foreground);
   --color-muted-foreground: var(--muted-foreground);
 
@@ -19,6 +20,14 @@
   --ease-house: cubic-bezier(0.32, 0.72, 0, 1);
 
   --animate-enter: enter 700ms var(--ease-house) both;
+  --animate-rise: rise 1400ms var(--ease-house) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+  }
 
   @keyframes enter {
     from {
@@ -32,6 +41,8 @@
 :root {
   --body: oklch(0.9651 0.0013 282.73);
   --card: oklch(0.986 0.0013 282.73);
+  --muted: oklch(0.935 0.002 282.73);
+  --border: oklch(0 0 0 / 8%);
   --foreground: oklch(0.18 0 0);
   --muted-foreground: oklch(0.55 0 0);
   --elevation-md:
@@ -44,6 +55,8 @@
   :root {
     --body: oklch(0.2175 0.0042 259.64);
     --card: oklch(0.2437 0.0059 259.64);
+    --muted: oklch(0.2 0.007 282.73);
+    --border: oklch(1 0 0 / 8%);
     --foreground: oklch(0.985 0 0);
     --muted-foreground: oklch(0.705 0 0);
     --elevation-md:
@@ -60,4 +73,44 @@
 /* Load sequence: stagger-N delays the Nth entering block */
 @utility stagger-* {
   animation-delay: calc(--value(integer) * 70ms);
+}
+
+@keyframes nav-border {
+  to {
+    border-color: var(--border);
+  }
+}
+
+/* Border appears once the page scrolls, driven by the scroll timeline */
+@utility nav-border {
+  animation: nav-border linear both;
+  animation-timeline: scroll();
+  animation-range: 0 1px;
+}
+
+/* Scroll reveal: the view timeline drives the fade, so no JS is involved */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: enter auto var(--ease-house) both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 90%;
+  }
+}
+
+@utility dot-grid {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(var(--foreground) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.12;
+    mask-image: radial-gradient(90% 70% at top, black, transparent);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }
