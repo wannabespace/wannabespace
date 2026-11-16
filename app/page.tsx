@@ -323,7 +323,7 @@ const Contact = () => (
       >
         Have an idea or a question?
         <span className="text-muted-foreground block">
-          Write to us at {EMAIL}.
+          Write to us at {EMAIL}
         </span>
       </h2>
       <a href={`mailto:${EMAIL}`} className={primaryButtonClassName}>
